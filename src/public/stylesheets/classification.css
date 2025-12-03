@@ -1,0 +1,57 @@
+.namePlayer:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    color: lightblue;
+}
+
+table tr{
+    text-align: center;
+}
+
+.prize-tour{
+    rgb(75 255 0 / 19%);
+}
+
+.p-head{
+    margin: 0;
+}
+
+.ttl p{
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+select {
+    vertical-align: top;
+    min-width: 30px;
+    background: #f2f3f5;
+    background: var(--field_background);
+    border: 1px solid rgba(0,0,0,.12);
+    border: 1px solid var(--field_border);
+    color: #000;
+    color: var(--text_primary);
+
+    line-height: 20px;
+    padding: 5px 12px;
+    margin: 0;
+    resize: vertical;
+    -webkit-transition: border .2s;
+    -moz-transition: border .2s;
+    -o-transition: border .2s;
+    transition: border .2s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+select {
+    background-image: url(/images/dropdown_44.png);
+    border: 1px solid black;
+    color: black;
+    background-repeat: no-repeat;
+    background-position: right center;
+    -webkit-background-size: 44px 44px;
+    -moz-background-size: 44px;
+    background-size: 44px;
+    padding-right: 44px;
+    outline:none;
+    cursor: pointer;
+}

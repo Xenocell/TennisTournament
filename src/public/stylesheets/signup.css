@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+body{
+    background: url("/images/bg3.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+.curtain{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    background: rgba(40,57,101,.75);
+    
+}
+.back {
+    position: absolute;
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    
+}
+.back a{
+    position: absolute;
+    color: white;
+    font-size: 26px;
+    text-decoration: none;
+}
+.en{
+    border-radius: 0px 4px 4px 0px;
+}
+.container{
+    max-width: 450px;
+    font-family: 'Numans', sans-serif;
+}
+.a{
+    padding: 0;
+    margin-top: 15vh;
+    margin-bottom: 15vh;
+}
+.t{
+    background: rgba(40,57,101,.9);
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+#gl-pass{
+    background: #007bff;
+    border-radius: 0px 5px 5px 0px;
+}
+@media (max-width: 768px) { 
+    .container{
+        max-width: 100%;
+        font-family: 'Numans', sans-serif;
+        min-height: 100vh;
+    }
+    .a{
+        margin: 0;
+    }
+    .t{
+        padding-top: 70px;
+    }
+}
+@media (max-width: 425px) { 
+    .t{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.form-check-input, .form-check-label{
+    cursor: pointer;
+}
+.agreement{
+    color: cornflowerblue; 
+    cursor: pointer;
+}
+.agreement:hover{
+    color: deepskyblue;
+}
+
+.spinner {
+    -webkit-animation: rotate 2s linear infinite;
+        animation: rotate 2s linear infinite;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    /* width: 100px; */
+    height: 100px;
+}
+.spinner .path {
+    stroke: #93bfec;
+    stroke-linecap: round;
+    -webkit-animation: dash 1.5s ease-in-out infinite;
+        animation: dash 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+    }
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}

@@ -1,0 +1,239 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.1/css/all.css')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/stylesheets/form.css')
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css')
+
+  script(src='https://code.jquery.com/jquery-3.5.1.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js' integrity='sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js')
+  script(src='/javascripts/referee_edit_tournament.js')
+
+.curtain
+  // Modal
+  #exampleModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title &Ocy;&pcy;&ocy;&vcy;&iecy;&shchcy;&iecy;&ncy;&icy;&iecy;
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+        .modal-footer.d-flex.justify-content-center
+          button.btn.btn-danger(type='button' data-dismiss='modal') &Zcy;&acy;&kcy;&rcy;&ycy;&tcy;&softcy;
+
+  .container-fluid
+    .row
+      .col-md-4.col-lg-2.navbar-container(style='background: rgb(85 127 220 / 50%);')
+        nav.navbar.navbar-expand-md.navbar-light
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbar' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+          #navbar.collapse.navbar-collapse
+            // Вертикальное меню
+            include layouts/navbar_referee
+            +navbar()
+      #box-content.col-md-8.col-lg-10.content-container(style='background-color: rgb(85 127 220 / 40%); color: white; min-height: calc(100vh - 56px); padding: 0px')
+        .curtain-spinner(style='position: absolute; width: 100%; height: 100%;z-index: 1;background: rgb(60 88 150 / 75%);padding: 0;margin: 0; display: none;')
+        #box-spinner.container(style='width: 100%; z-index: 1; background: rgba(40,57,101,.9); padding: 0; display: none;')
+          svg.spinner(viewbox='0 0 50 50')
+            circle.path(cx='25' cy='25' r='20' fill='none' stroke-width='5')
+          svg#table-update(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 16 16' style='display: none; cursor:pointer; z-index: 2; position: absolute; top: 50%;left: 50%;margin: -50px 0 0 -50px;width: 100px;height: 100px;')
+            defs#defs3051
+              style#current-color-scheme(type='text/css').
+                .ColorScheme-Highlight {
+                color:#93bfec;
+                }
+            path.ColorScheme-Highlight(style='fill:currentColor;fill-opacity:1;stroke:none' d='M 8 1 A 7 7 0 0 0 1 8 A 7 7 0 0 0 8 15 A 7 7 0 0 0 15 8 A 7 7 0 0 0 8 1 z ')
+            path(style='fill:#ffffff;fill-opacity:1;stroke:none' d='M 8 2 L 8 3 A 5 5 0 0 0 3 8 A 5 5 0 0 0 8 13 A 5 5 0 0 0 13 8 L 11 8 A 3 3 0 0 1 8 11 A 3 3 0 0 1 5 8 A 3 3 0 0 1 8 5 L 8 6 L 11 4 L 8 2 z ')
+        .container
+          h1.h3.text-center.mt-5 Редактирование турнира
+          hr.mb-5
+          section
+            form
+              if data!= null
+                .form-group
+                  label(for='InputNameTour') &Ncy;&acy;&icy;&mcy;&iecy;&ncy;&ocy;&vcy;&acy;&ncy;&icy;&iecy; &tcy;&ucy;&rcy;&ncy;&icy;&rcy;&acy;
+                  input#InputNameTour.form-control(type='text' value=data.title)
+                .form-group
+                  label(for='floor') &Tcy;&icy;&pcy; &tcy;&ucy;&rcy;&ncy;&icy;&rcy;&acy;
+                  br
+                  .btn-group(role='group' aria-label='Basic example')
+                    if data.type == 0
+                      button#but-prize.btn.btn-success(type='button') &Pcy;&rcy;&icy;&zcy;&ocy;&vcy;&ocy;&jcy;
+                      button#but-rating.btn.btn-light.ml-1(type='button') &Rcy;&iecy;&jcy;&tcy;&icy;&ncy;&gcy;&ocy;&vcy;&ycy;&jcy;
+                    else 
+                      button#but-prize.btn.btn-light(type='button') &Pcy;&rcy;&icy;&zcy;&ocy;&vcy;&ocy;&jcy;
+                      button#but-rating.btn.btn-success.ml-1(type='button') &Rcy;&iecy;&jcy;&tcy;&icy;&ncy;&gcy;&ocy;&vcy;&ycy;&jcy;
+                  input#InputCinfo.mt-2.form-control(type='text' style='display: ' + (data.type == 1 ? '' : 'none') value=data.c_info)
+
+                .form-group#prize-form(style='display: ' + (data.type == 0 ? '' : 'none')) 
+                  label(for='InputNameTour') Призовой фонд
+                  input#InputPrize.form-control(type='text' value=data.prize)
+
+                .form-group#vznos-form(style='display: ' + (data.type == 1 ? '' : 'none'))
+                  label(for='InputPayment') Взнос
+                  input#InputPayment.form-control(type='text' style='width: 100px;' value=data.payment)
+                
+                .form-group
+                  label(for='floor') &Fcy;&ocy;&rcy;&mcy;&acy;&tcy;
+                  br
+                  .btn-group(role='group' aria-label='Basic example')
+                    if data.format == 1
+                      button#but-os.btn.btn-success(type='button') О
+                      button#but-aos.btn.btn-light.ml-1(type='button') У
+                      button#but-k.btn.btn-light.ml-1(type='button') К
+                    else if data.format == 2
+                      button#but-os.btn.btn-light(type='button') О
+                      button#but-aos.btn.btn-success.ml-1(type='button') У
+                      button#but-k.btn.btn-light.ml-1(type='button') К
+                    else if data.format == 3
+                      button#but-os.btn.btn-light(type='button') О
+                      button#but-aos.btn.btn-light.ml-1(type='button') У
+                      button#but-k.btn.btn-success.ml-1(type='button') К
+                
+                .form-group
+                  label(for='floor') &Pcy;&ocy;&lcy; &ucy;&chcy;&acy;&scy;&tcy;&ncy;&icy;&kcy;&ocy;&vcy;
+                  br
+                  .btn-group(role='group' aria-label='Basic example')
+                    if data.gender == 0
+                      button#but-male.btn.btn-success(type='button') &Mcy;&ucy;&zhcy;&scy;&kcy;&ocy;&jcy;
+                      button#but-female.btn.btn-light.ml-1(type='button') &ZHcy;&iecy;&ncy;&scy;&kcy;&icy;&jcy;
+                    else 
+                      button#but-male.btn.btn-light(type='button') &Mcy;&ucy;&zhcy;&scy;&kcy;&ocy;&jcy;
+                      button#but-female.btn.btn-success.ml-1(type='button') &ZHcy;&iecy;&ncy;&scy;&kcy;&icy;&jcy;
+                
+                .form-group
+                  -var date_birth = data.year_birth.split('-')
+                  label(for='floor') Год рождения участников
+                  br
+                  div(style='display:flex; align-items: center;')
+                    select#set-year1-players.sel(autocomplete='bday-year' name='byear' style='border-radius: 4px; margin-left: 4px; width: 150px;' value=date_birth[0])
+                      option(value='0') &Gcy;&ocy;&dcy;
+                    span.ml-2.mr-1 -
+                    select#set-year2-players.sel(autocomplete='bday-year' name='byear' style='border-radius: 4px; margin-left: 4px; width: 150px;' value=date_birth[1])
+                      option(value='0') &Gcy;&ocy;&dcy;
+                
+                .form-group
+                  -var date_start = data.start_date.split('.')
+                  label(for='floor') &Dcy;&acy;&tcy;&acy; &ncy;&acy;&chcy;&acy;&lcy;&acy; &tcy;&ucy;&rcy;&ncy;&icy;&rcy;&acy;
+                  table.row_table
+                    tbody
+                      tr
+                        td.row_table_column
+                          select#set-day-start.sel(autocomplete='bday-day' name='bday' style='border-radius: 5px 0px 0px 5px; ' value = date_start[0])
+                            option(value='0') &Dcy;&iecy;&ncy;&softcy;
+                        td.row_table_column
+                          select#set-month-start.sel(autocomplete='bday-month' name='bmonth' style='border-radius: 0; margin-left: 2px;' value = date_start[1])
+                            option(value='0') &Mcy;&iecy;&scy;&yacy;&tscy;
+                            option(value='1') &YAcy;&ncy;&vcy;&acy;&rcy;&yacy;
+                            option(value='2') &Fcy;&iecy;&vcy;&rcy;&acy;&lcy;&yacy;
+                            option(value='3') &Mcy;&acy;&rcy;&tcy;&acy;
+                            option(value='4') &Acy;&pcy;&rcy;&iecy;&lcy;&yacy;
+                            option(value='5') &Mcy;&acy;&yacy;
+                            option(value='6') &Icy;&yucy;&ncy;&yacy;
+                            option(value='7') &Icy;&yucy;&lcy;&yacy;
+                            option(value='8') &Acy;&vcy;&gcy;&ucy;&scy;&tcy;&acy;
+                            option(value='9') &Scy;&iecy;&ncy;&tcy;&yacy;&bcy;&rcy;&yacy;
+                            option(value='10') &Ocy;&kcy;&tcy;&yacy;&bcy;&rcy;&yacy;
+                            option(value='11') &Ncy;&ocy;&yacy;&bcy;&rcy;&yacy;
+                            option(value='12') &Dcy;&iecy;&kcy;&acy;&bcy;&rcy;&yacy;
+                        td.row_table_last_column
+                          select#set-year-start.sel(autocomplete='bday-year' name='byear' style='border-radius: 0px 5px 5px 0px; margin-left: 4px;' value = date_start[2])
+                            option(value='0') &Gcy;&ocy;&dcy;
+                .form-group
+                  -var date_end = data.end_date.split('.')
+                  label(for='floor') &Dcy;&acy;&tcy;&acy; &ocy;&kcy;&ocy;&ncy;&chcy;&acy;&ncy;&icy;&yacy; &tcy;&ucy;&rcy;&ncy;&icy;&rcy;&acy;
+                  table.row_table
+                    tbody
+                      tr
+                        td.row_table_column
+                          select#set-day-end.sel(autocomplete='bday-day' name='bday' style='border-radius: 5px 0px 0px 5px; ' value = date_end[0])
+                            option(value='0') &Dcy;&iecy;&ncy;&softcy;
+                        td.row_table_column
+                          select#set-month-end.sel(autocomplete='bday-month' name='bmonth' style='border-radius: 0; margin-left: 2px;' value = date_end[1])
+                            option(value='0') &Mcy;&iecy;&scy;&yacy;&tscy;
+                            option(value='1') &YAcy;&ncy;&vcy;&acy;&rcy;&yacy;
+                            option(value='2') &Fcy;&iecy;&vcy;&rcy;&acy;&lcy;&yacy;
+                            option(value='3') &Mcy;&acy;&rcy;&tcy;&acy;
+                            option(value='4') &Acy;&pcy;&rcy;&iecy;&lcy;&yacy;
+                            option(value='5') &Mcy;&acy;&yacy;
+                            option(value='6') &Icy;&yucy;&ncy;&yacy;
+                            option(value='7') &Icy;&yucy;&lcy;&yacy;
+                            option(value='8') &Acy;&vcy;&gcy;&ucy;&scy;&tcy;&acy;
+                            option(value='9') &Scy;&iecy;&ncy;&tcy;&yacy;&bcy;&rcy;&yacy;
+                            option(value='10') &Ocy;&kcy;&tcy;&yacy;&bcy;&rcy;&yacy;
+                            option(value='11') &Ncy;&ocy;&yacy;&bcy;&rcy;&yacy;
+                            option(value='12') &Dcy;&iecy;&kcy;&acy;&bcy;&rcy;&yacy;
+                        td.row_table_last_column
+                          select#set-year-end.sel(autocomplete='bday-year' name='byear' style='border-radius: 0px 5px 5px 0px; margin-left: 4px;' value = date_end[2])
+                            option(value='0') &Gcy;&ocy;&dcy;
+                .form-group
+                  label(for='InputPlace') &Mcy;&iecy;&scy;&tcy;&ocy; &pcy;&rcy;&ocy;&vcy;&iecy;&dcy;&iecy;&ncy;&icy;&yacy;
+                  .input-group
+                    input#InputPlace.form-control(type='text' value=data.place)
+                
+                .form-group.gr-points(style='display: ' + (data.type == 1 ? '' : 'none'))
+                  label(for='floor') Очки
+                  br
+                  select#type-points.sel(autocomplete='bday-year' name='byear' style='border-radius: 4px; margin-left: 4px; width: 290px;' value=data.type_points)
+                    option(value='1') 0-0-0-0-0-0-0-0
+                    option(value='2') 54-56-58-60-62-64-66-68
+                    option(value='3') 50-52-54-56-58-60-62-64
+                    option(value='4') 46-48-50-52-54-56-58-60
+                    option(value='5') 42-44-46-48-50-52-54-56
+
+                .form-group
+                  label(for='floor') &Kcy;&ocy;&lcy;&icy;&chcy;&iecy;&scy;&tcy;&vcy;&ocy; &ucy;&chcy;&acy;&scy;&tcy;&ncy;&icy;&kcy;&ocy;&vcy;
+                  br
+                  select#count-players.sel(autocomplete='bday-year' name='byear' style='border-radius: 4px; margin-left: 4px; width: 50px;' value=data.particions_number)
+                    option(value='4') 4
+                    option(value='8') 8
+                    option(value='16') 16
+                    option(value='24') 24
+                    option(value='32') 32
+                    option(value='40') 40
+                    option(value='48') 48
+                    option(value='56') 56
+                    option(value='64') 64
+                .form-group
+                  label(for='floor') Тип корта
+                  br
+                  .btn-group(role='group' )
+                    if data.court_type=='Хард'
+                      button#but-hard.btn.btn-success(type='button') Хард
+                      button#but-grunt.btn.btn-light.ml-1(type='button') Грунт
+                    else 
+                      button#but-hard.btn.btn-light(type='button') Хард
+                      button#but-grunt.btn.btn-success.ml-1(type='button') Грунт
+                .form-group
+                  label(for='floor') &Kcy;&ocy;&lcy;&icy;&chcy;&iecy;&scy;&tcy;&vcy;&ocy; &kcy;&ocy;&rcy;&tcy;&ocy;&vcy;
+                  br
+                  select#count-court.sel(autocomplete='bday-year' name='byear' style='border-radius: 4px; margin-left: 4px; width: 50px;' value=data.court_count)
+                    option(value='1') 1
+                    option(value='2') 2
+                    option(value='3') 3
+                    option(value='4') 4
+                    option(value='5') 5
+                    option(value='6') 6
+                    option(value='7') 7
+                    option(value='8') 8
+                .form-group
+                  label(for='InputReferee') &Gcy;&lcy;&acy;&vcy;&ncy;&ycy;&jcy; &scy;&ucy;&dcy;&softcy;&yacy;
+                  input#InputReferee.form-control(type='text' value =data.head_referee)
+                .form-group
+                  label(for='InputPhoneReferee') &Kcy;&ocy;&ncy;&tcy;&acy;&kcy;&tcy;&ncy;&ycy;&jcy; &tcy;&iecy;&lcy;&iecy;&fcy;&ocy;&ncy; &scy;&ucy;&dcy;&softcy;&icy;
+                  input#InputPhoneReferee.form-control(type='text' value=data.referee_phone)
+                .form-group
+                  label(for='InputEmailReferee') &Acy;&dcy;&rcy;&iecy;&scy; &ecy;&lcy;&iecy;&kcy;&tcy;&rcy;&ocy;&ncy;&ncy;&ocy;&jcy; &pcy;&ocy;&chcy;&tcy;&ycy; &scy;&ucy;&dcy;&softcy;&icy;
+                  input#InputEmailReferee.form-control(type='text' value =data.referee_mail)
+                .form-group
+                  label.label-color(value=data.color) Цвет в календаре
+                  div.color-picker
+                button#save-but.btn.btn-primary.mt-5.btn-block.mx-auto(style='margin-bottom: 120px;')
+                  | Сохранить

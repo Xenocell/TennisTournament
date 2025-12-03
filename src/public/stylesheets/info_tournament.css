@@ -1,0 +1,21 @@
+.content{
+    background-color: #f0f0f0;
+}
+
+.nav-link{
+    padding: 0px;
+}
+
+li{
+    padding-left: 25px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+li:hover{
+   background-color: lightcoral;
+}
+
+li span {
+    color: #5b008b;
+}
